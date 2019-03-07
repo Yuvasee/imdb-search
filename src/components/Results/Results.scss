@@ -4,6 +4,60 @@
   background: #ccc;
   box-sizing: border-box;
 
+  .tile-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    .movie-tile {
+      width: 25vw;
+      height: 37.3vw;
+      background-size: cover;
+      display: flex;
+      flex-direction: column-reverse;
+      position: relative;
+
+      .movie-title, .movie-year {
+        color: white;
+        background: rgba(0,0,0,.5);
+        text-align: center;
+        opacity: 0;
+        transition: all .2s linear;
+      }
+
+      &:hover .movie-title,
+      &:hover .movie-year {
+        opacity: 1;
+      }
+
+      &:hover .movie-year {
+        margin-bottom: 1rem;
+      }
+
+      .movie-title {
+        padding-top: 0.5rem;
+      }
+
+      .movie-year {
+        padding: 0.2rem 0 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 200;
+        margin-bottom: 0;
+      }
+
+      .no-poster {
+        text-align: center;
+        font-size: 1.6rem;
+        color: #000;
+        text-shadow: 0 1px 1px #bbb;
+        padding: 0 1rem;
+        position: absolute;
+        top: 3rem;
+        width: 25vw;
+        box-sizing: border-box;
+      }
+    }
+  }
+
   .empty {
     position: absolute;
     top: 50%;
