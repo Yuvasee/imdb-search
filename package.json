@@ -5,8 +5,10 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "dev": "webpack-dev-server --hot"
+    "dev": "webpack-dev-server --hot",
+    "build": "webpack -p --config webpack.config.js",
+    "heroku-postbuild": "webpack -p --config webpack.config.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +33,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "lodash": "^4.17.11",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
