@@ -8,8 +8,12 @@ const totalReducer = (state = initState, action) => {
 
   switch (type) {
     case API_SUCCESS:
-      const { phrase, json } = payload;
-      nextState[phrase] = json.totalResults;
+      const { phrase, json, page } = payload;
+      nextState[phrase] = {
+        total: json.totalResults,
+        pagesLoaded: page
+      }
+
       return nextState;
 
     default:

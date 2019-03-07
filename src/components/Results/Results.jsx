@@ -1,17 +1,39 @@
 import React, { Component } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+
+import { randomRgb } from '../../utils/utils';
+import Spinner from '../Spinner/Spinner';
 
 import './Results.scss';
-import { randomRgb } from '../../utils/utils';
 
 export default class Results extends Component {
+  loadMore() {
+    //TODO: check for last page loaded!
+    const { lastPhrase, lastPage, searchPerform } = this.props;
+    searchPerform(lastPhrase, lastPage + 1);
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", () => this.handleScroll());
+  }
+
+  handleScroll() {
+    const {isPendingResponse, isLastPageLoaded } = this.props;
+
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+      if (!isPendingResponse && !isLastPageLoaded) {
+        this.loadMore();
+      }
+    }
+  }
+
   render() {
-    const { results } = this.props;
+    const { results, isPendingResponse } = this.props;
 
     return (
       <div className="results">
         {results &&
           <div className="tile-container">
-
             {results.map((res, i) => (
               <div
                 key={res.imdbID}
@@ -36,24 +58,21 @@ export default class Results extends Component {
                 }
               </div>
             ))}
-
           </div>
         }
 
-        {!results &&
+        {(!Array.isArray(results) && !isPendingResponse) &&
           <div className="empty">
             Try to search for something
+          </div>
+        }
+
+        {(!Array.isArray(results) && isPendingResponse) &&
+          <div className="results-spinner">
+            <Spinner />
           </div>
         }
       </div>
     )
   }
 }
-/*
-{
-  "Title": "God Bless America",
-  "Year": "2011",
-  "imdbID": "tt1912398",
-  "Type": "movie",
-  "Poster": "https://m.media-amazon.com/images/M/MV5BMTQwMTc1MzA4NF5BMl5BanBnXkFtZTcwNzQwMTgzNw@@._V1_SX300.jpg"
-}, */
