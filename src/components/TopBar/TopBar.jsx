@@ -11,7 +11,7 @@ export default class TopBar extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      phrase: '',
+      phrase: this.props.lastPhrase,
     };
   }
 
@@ -33,7 +33,7 @@ export default class TopBar extends Component {
   }
 
   render() {
-    const { phrase } = this.props;
+    const { phrase } = this.state;
 
     return (
       <div className="top-bar">
