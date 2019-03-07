@@ -1,0 +1,72 @@
+$input-padding-x: 1.5rem;
+$input-padding-y: .75rem;
+$search-height: 2.3rem;
+
+.top-bar {
+  position: fixed;
+  display: flex;
+  height: 3.5rem;
+  width: 100%;
+  background: black;
+  color: white;
+  align-items: center;
+  justify-content: center;
+
+  .logo {
+    font-weight: 400;
+    padding-right: 2rem;
+  }
+
+  .search-container {
+    position: relative;
+
+    button {
+      height: $search-height * 0.8;
+      border-radius: $search-height / 2;
+      padding: 0 1.6rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-left: 2rem;
+      color: black;
+      background-color: rgb(245, 197, 24);
+      border: 1px solid rgb(204, 153, 51);
+    }
+  }
+
+  .search {
+    height: $search-height;
+    border-radius: $search-height / 2;
+    padding: 0 0.8rem;
+    font-size: 0.9rem;
+    width: 10rem;
+    font-weight: 500;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &~label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      margin-bottom: 0;
+      //line-height: 1.5;
+      color: #999;
+      border: 1px solid transparent;
+      transition: all .3s ease-in-out;
+      padding: 0 0.8rem;
+      font-size: 0.8rem;
+      height: $search-height;
+      line-height: $search-height;
+    }
+
+    &:not(:placeholder-shown)~label {
+      font-size: 0.5rem;
+      line-height: 0.8rem;
+      color: #ccc;
+    }
+  }
+}
