@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 
 import './TopBar.scss';
+import { timingSafeEqual } from 'crypto';
 
 export default class TopBar extends Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      search: '',
+      phrase: '',
     };
   }
 
@@ -19,8 +21,19 @@ export default class TopBar extends Component {
     })
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const { phrase } = this.state;
+    const { searchPerform, lastPhrase } = this.props;
+
+    if (phrase.length > 2 && phrase !== lastPhrase) {
+      searchPerform(phrase);
+    }
+  }
+
   render() {
-    const { search } = this.props;
+    const { phrase } = this.props;
 
     return (
       <div className="top-bar">
@@ -28,18 +41,18 @@ export default class TopBar extends Component {
           IMDB Search
         </div>
         <div className="search-container">
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="text"
-              name="search"
-              id="search"
+              name="phrase"
+              id="phrase"
               className="search"
-              value={search}
+              value={phrase}
               autoFocus
               onChange={this.handleChange}
               placeholder="Godfather"
             />
-            <label htmlFor="search">Movie name</label>
+            <label htmlFor="phrase">Movie name</label>
             <button type="submit">
               Try!
             </button>

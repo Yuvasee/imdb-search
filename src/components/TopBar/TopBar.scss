@@ -21,10 +21,10 @@ $search-height: 2.3rem;
     position: relative;
 
     button {
+      cursor: pointer;
       height: $search-height * 0.8;
       border-radius: $search-height / 2;
       padding: 0 1.6rem;
-      cursor: pointer;
       font-size: 0.9rem;
       font-weight: 500;
       margin-left: 2rem;
@@ -51,8 +51,6 @@ $search-height: 2.3rem;
       top: 0;
       left: 0;
       display: block;
-      width: 100%;
-      margin-bottom: 0;
       //line-height: 1.5;
       color: #999;
       border: 1px solid transparent;

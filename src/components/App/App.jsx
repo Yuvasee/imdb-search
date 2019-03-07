@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import TopBar from '../TopBar/TopBar';
-import Results from '../Results/Results';
+import TopBar from '../TopBar/TopBarContainer';
+import Results from '../Results/ResultsContainer';
 
 export default class App extends Component {
   render() {

@@ -2,9 +2,13 @@ import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import app from '../reducers/appReducer';
+import search from '../reducers/searchReducer';
+import total from '../reducers/totalReducer';
 
 const rootReducer = combineReducers({
   app,
+  search,
+  total
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

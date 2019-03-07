@@ -4,11 +4,22 @@ import './Results.scss';
 
 export default class Results extends Component {
   render() {
+    const { results } = this.props;
+
     return (
       <div className="results">
-        <div className="empty">
-          Try to search for something
-        </div>
+        {results &&
+          results.map((res, i) => (
+            <p key={res.imdbID}>
+              {res.Title}
+            </p>
+          ))
+        }
+        {!results &&
+          <div className="empty">
+            Try to search for something
+          </div>
+        }
       </div>
     )
   }
