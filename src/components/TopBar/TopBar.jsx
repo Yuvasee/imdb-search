@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './TopBar.scss';
-import { timingSafeEqual } from 'crypto';
 
 export default class TopBar extends Component {
   constructor(props) {

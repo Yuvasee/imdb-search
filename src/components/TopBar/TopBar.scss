@@ -10,10 +10,14 @@ $search-height: 2.3rem;
   background: black;
   color: white;
   justify-content: center;
+  z-index: 1;
 
   .logo {
     font-weight: 400;
     padding: 1rem 2rem 0 0;
+    @media (max-width: 580px) {
+      display: none;
+    }
   }
 
   .search-container {
@@ -76,14 +80,16 @@ $search-height: 2.3rem;
     height: $search-height * 0.8;
     border-radius: $search-height / 2;
     padding: 0 1.6rem;
-    margin-top: 0.72rem;
     font-size: 0.9rem;
     font-weight: 500;
-    margin-left: 2rem;
+    margin: 0.72rem 0 0 2rem;
     color: black;
     background-color: rgb(245, 197, 24);
     border: 1px solid rgb(204, 153, 51);
     outline: none;
+    @media (max-width: 420px) {
+      margin-left: 1rem;
+    }
   }
 
 }

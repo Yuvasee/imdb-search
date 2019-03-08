@@ -1,3 +1,5 @@
+$tileMinWidth: 200px;
+
 .results {
   min-height: 100vh;
   padding-top: 4rem;
@@ -9,8 +11,39 @@
     flex-wrap: wrap;
 
     .movie-tile {
-      width: 25vw;
-      height: 37.3vw;
+      $tileWidth: 50vw;
+      width: $tileWidth;
+      height: $tileWidth * 1.49;
+      @media (min-width: $tileMinWidth * 3) {
+        $tileWidth: 33.33vw;
+        width: $tileWidth;
+        height: $tileWidth * 1.49;
+      }
+      @media (min-width: $tileMinWidth * 4) {
+        $tileWidth: 25vw;
+        width: $tileWidth;
+        height: $tileWidth * 1.49;
+      }
+      @media (min-width: $tileMinWidth * 5) {
+        $tileWidth: 20vw;
+        width: $tileWidth;
+        height: $tileWidth * 1.49;
+      }
+      @media (min-width: $tileMinWidth * 6) {
+        $tileWidth: 16.665vw;
+        width: $tileWidth;
+        height: $tileWidth * 1.49;
+      }
+      @media (min-width: $tileMinWidth * 8) {
+        $tileWidth: 12.5vw;
+        width: $tileWidth;
+        height: $tileWidth * 1.49;
+      }
+      @media (min-width: $tileMinWidth * 10) {
+        $tileWidth: 10vw;
+        width: $tileWidth;
+        height: $tileWidth * 1.49;
+      }
       background-size: cover;
       display: flex;
       flex-direction: column-reverse;
@@ -53,7 +86,7 @@
         padding: 0 1rem;
         position: absolute;
         top: 3rem;
-        width: 25vw;
+        width: $tileWidth;
         box-sizing: border-box;
       }
     }
