@@ -1,6 +1,6 @@
 .results {
   min-height: 100vh;
-  padding-top: 3.5rem;
+  padding-top: 4rem;
   background: #ccc;
   box-sizing: border-box;
 
@@ -15,10 +15,11 @@
       display: flex;
       flex-direction: column-reverse;
       position: relative;
+      overflow: hidden;
 
       .movie-title, .movie-year {
         color: white;
-        background: rgba(0,0,0,.5);
+        background: rgba(0,0,0,.8);
         text-align: center;
         opacity: 0;
         transition: all .2s linear;

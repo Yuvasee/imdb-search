@@ -9,8 +9,8 @@ import './Results.scss';
 export default class Results extends Component {
   loadMore() {
     //TODO: check for last page loaded!
-    const { lastPhrase, lastPage, searchPerform } = this.props;
-    searchPerform(lastPhrase, lastPage + 1);
+    const { lastPhrase, lastLoadedPage, lastYear, searchPerform } = this.props;
+    searchPerform(lastPhrase, lastLoadedPage + 1, lastYear);
   }
 
   componentDidMount() {
@@ -36,7 +36,7 @@ export default class Results extends Component {
           <div className="tile-container">
             {results.map((res, i) => (
               <div
-                key={res.imdbID}
+                key={res.imdbID + i}
                 className="movie-tile"
                 style={{
                   backgroundImage: res.Poster === 'N/A' ? 'none' : `url('${res.Poster}')`,

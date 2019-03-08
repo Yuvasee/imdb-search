@@ -2,6 +2,7 @@ import { unionWith, isEqual } from 'lodash';
 
 import { API_SUCCESS } from '../actions/actions';
 
+/** API calls caching reducer */
 const initState = {};
 
 const searchReducer = (state = initState, action) => {
@@ -10,12 +11,15 @@ const searchReducer = (state = initState, action) => {
 
   switch (type) {
     case API_SUCCESS:
-      const { phrase, json } = payload;
-      if (phrase in nextState) {
-        const unitedData = unionWith(nextState[phrase], json.Search, isEqual);
-        nextState[phrase] = unitedData;
+      const { phrase, year, json } = payload;
+
+      const query = `${phrase}@${year}`;
+
+      if (query in nextState) {
+        const unitedData = unionWith(nextState[query], json.Search, isEqual);
+        nextState[query] = unitedData;
       } else {
-        nextState[phrase] = json.Search;
+        nextState[query] = json.Search;
       }
       return nextState;
 

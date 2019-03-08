@@ -5,66 +5,85 @@ $search-height: 2.3rem;
 .top-bar {
   position: fixed;
   display: flex;
-  height: 3.5rem;
   width: 100%;
+  height: 4rem;
   background: black;
   color: white;
-  align-items: center;
   justify-content: center;
 
   .logo {
     font-weight: 400;
-    padding-right: 2rem;
+    padding: 1rem 2rem 0 0;
   }
 
   .search-container {
     position: relative;
+    margin-top: 0.5rem;
 
-    button {
-      cursor: pointer;
-      height: $search-height * 0.8;
-      border-radius: $search-height / 2;
-      padding: 0 1.6rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-left: 2rem;
-      color: black;
-      background-color: rgb(245, 197, 24);
-      border: 1px solid rgb(204, 153, 51);
-    }
-  }
-
-  .search {
-    height: $search-height;
-    border-radius: $search-height / 2;
-    padding: 0 0.8rem;
-    font-size: 0.9rem;
-    width: 10rem;
-    font-weight: 500;
-
-    &::placeholder {
-      color: transparent;
-    }
-
-    &~label {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      //line-height: 1.5;
-      color: #999;
-      border: 1px solid transparent;
-      transition: all .3s ease-in-out;
-      padding: 0 0.8rem;
-      font-size: 0.8rem;
+    .search {
       height: $search-height;
-      line-height: $search-height;
+      border-top-left-radius: $search-height / 2;
+      border-bottom-left-radius: $search-height / 2;
+      padding: 0 0.8rem;
+      font-size: 0.9rem;
+      width: 7rem;
+      font-weight: 500;
+      outline: none;
+
+      &.year {
+        width: 5rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: $search-height / 2;
+        border-top-right-radius: $search-height / 2;
+        border-left: 1px solid #ddd;
+      }
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      &~label {
+        position: absolute;
+        top: 0.05rem;
+        left: 0;
+        display: block;
+        color: #999;
+        border: 1px solid transparent;
+        transition: all .2s ease-in-out;
+        padding: 0 0.8rem;
+        font-size: 0.8rem;
+        height: $search-height;
+        line-height: $search-height;
+      }
+
+      &:not(:placeholder-shown)~label {
+        font-size: 0.5rem;
+        line-height: 0.8rem;
+        color: #ccc;
+      }
     }
 
-    &:not(:placeholder-shown)~label {
-      font-size: 0.5rem;
-      line-height: 0.8rem;
-      color: #ccc;
+    .tip {
+      font-size: .5rem;
+      padding: .2rem .8rem;
+      color: #999;
     }
   }
+
+  button.go {
+    cursor: pointer;
+    height: $search-height * 0.8;
+    border-radius: $search-height / 2;
+    padding: 0 1.6rem;
+    margin-top: 0.72rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-left: 2rem;
+    color: black;
+    background-color: rgb(245, 197, 24);
+    border: 1px solid rgb(204, 153, 51);
+    outline: none;
+  }
+
 }

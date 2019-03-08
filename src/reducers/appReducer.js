@@ -3,7 +3,8 @@ import { API_REQUEST, API_SUCCESS, API_FAILURE, LAST_PAGE_LOADED, PHRASE_SWITCH 
 
 const initState = {
   lastPhrase: '',
-  lastPage: 0,
+  lastLoadedPage: 0,
+  lastYear: '',
   isPendingResponse: false,
   isLastPageLoaded: false
 };
@@ -19,7 +20,8 @@ const appReducer = (state = initState, action) => {
 
     case API_SUCCESS:
       nextState.lastPhrase = payload.phrase;
-      nextState.lastPage = payload.page;
+      nextState.lastLoadedPage = payload.page;
+      nextState.lastYear = payload.year;
       nextState.isLastPageLoaded = false;
       return nextState;
 
@@ -29,7 +31,8 @@ const appReducer = (state = initState, action) => {
 
     case PHRASE_SWITCH:
       nextState.lastPhrase = payload.phrase;
-      nextState.lastPage = payload.lastPage;
+      nextState.lastLoadedPage = payload.lastLoadedPage;
+      nextState.lastYear = payload.year;
       nextState.isLastPageLoaded = false;
       return nextState;
 

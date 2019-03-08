@@ -5,6 +5,7 @@ import { searchPerform } from '../../actions/actions';
 
 const mapStateToProps = (state) => ({
   lastPhrase: state.app.lastPhrase,
+  lastYear: state.app.lastYear,
 });
 
 const mapDispatchToProps = {

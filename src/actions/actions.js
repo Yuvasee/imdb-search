@@ -7,28 +7,24 @@ export const LAST_PAGE_LOADED = 'LAST_PAGE_LOADED';
 export const PHRASE_SWITCH = 'PHRASE_SWITCH';
 export const RESULTS_FLUSH = 'RESULTS_FLUSH';
 
-export function searchPerform(phrase, page = 1) {
+export function searchPerform(phrase, page = 1, year) {
   return function(dispatch) {
-    const state = store.getState();
+    const query = `${phrase}@${year}`;
 
-    if (
-      phrase !== state.app.lastPhrase &&      // phrase changed
-      Array.isArray(state.search[phrase]) &&  // new phrase alredy in store
-      state.total[phrase].pagesLoaded > 0     // really?
-    ) {
-      dispatch(phraseSwitch(phrase, state.total[phrase].pagesLoaded));
+    if (canSwitchToStoredData(phrase, query)) {
+      dispatch(phraseSwitch(phrase, store.getState().total[query].pagesLoaded));
       return Promise.resolve();
     }
 
     dispatch(apiRequest(true));
 
-    return fetch(`${process.env.API_URI}?s=${phrase}&page=${page}&apikey=${process.env.API_KEY}`)
+    return fetch(makeApiUri(phrase, page, year))
       .then(response =>
         response.json()
       )
       .then(json => {
         if (json.Response !== 'False') {
-          dispatch(apiSuccess(phrase, json, page));
+          dispatch(apiSuccess(phrase, json, page, year));
         } else {
           dispatch(lastPageLoaded());
         }
@@ -46,13 +42,14 @@ export function apiRequest(isPendingResponse) {
   return { type: API_REQUEST, payload: isPendingResponse }
 }
 
-export function apiSuccess(phrase, json, page) {
+export function apiSuccess(phrase, json, page, year) {
   return {
     type: API_SUCCESS,
     payload: {
       phrase,
       json,
-      page
+      page,
+      year
     }
   };
 }
@@ -65,16 +62,30 @@ export function lastPageLoaded() {
   return { type: LAST_PAGE_LOADED };
 }
 
-export function phraseSwitch(phrase, lastPage) {
+export function phraseSwitch(phrase, lastLoadedPage) {
   return {
     type: PHRASE_SWITCH,
     payload: {
       phrase,
-      lastPage
+      lastLoadedPage
     }
   };
 }
 
 export function resultsFlush() {
   return { type: RESULTS_FLUSH };
+}
+
+function canSwitchToStoredData(phrase, query) {
+  const state = store.getState();
+  return (
+    phrase !== state.app.lastPhrase &&      // phrase changed
+    Array.isArray(state.search[query]) &&  // new phrase alredy in store
+    state.total[query].pagesLoaded > 0     // at least 1 page loaded
+  );
+}
+
+function makeApiUri(phrase, page, year) {
+  return `${process.env.API_URI}?apikey=${process.env.API_KEY}` +
+  `&s=${phrase}&page=${page}` + (year ? `&y=${year}` : ``);
 }

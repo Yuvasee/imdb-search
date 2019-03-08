@@ -11,7 +11,8 @@ export default class TopBar extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      phrase: this.props.lastPhrase,
+      phrase: this.props.lastPhrase || '',
+      year: this.props.lastYear || ''
     };
   }
 
@@ -24,24 +25,24 @@ export default class TopBar extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { phrase } = this.state;
-    const { searchPerform, lastPhrase } = this.props;
+    const { phrase, year } = this.state;
+    const { searchPerform, lastPhrase, lastYear } = this.props;
 
-    if (phrase.length > 2 && phrase !== lastPhrase) {
-      searchPerform(phrase);
+    if (phrase !== lastPhrase || year !== lastYear) {
+      searchPerform(phrase, 1, year !== '' ? year : null);
     }
   }
 
   render() {
-    const { phrase } = this.state;
+    const { phrase, year } = this.state;
 
     return (
-      <div className="top-bar">
-        <div className="logo">
-          IMDB Search
-        </div>
-        <div className="search-container">
-          <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
+        <div className="top-bar">
+          <div className="logo">
+            IMDB Search
+          </div>
+          <div className="search-container">
             <input
               type="text"
               name="phrase"
@@ -49,16 +50,42 @@ export default class TopBar extends Component {
               className="search"
               value={phrase}
               autoFocus
+              required
               onChange={this.handleChange}
               placeholder="Godfather"
             />
-            <label htmlFor="phrase">Movie name</label>
-            <button type="submit">
-              Try!
-            </button>
-          </form>
+            <label htmlFor="phrase">
+              Movie name
+            </label>
+            <div className="tip">
+              Use * for the mask
+            </div>
+          </div>
+          <div className="search-container">
+            <input
+              type="number"
+              min="1900"
+              max={new Date().getFullYear()}
+              name="year"
+              id="year"
+              className="search year"
+              value={year}
+              autoFocus
+              onChange={this.handleChange}
+              placeholder="1999"
+            />
+            <label htmlFor="year">
+              Year
+            </label>
+            <div className="tip">
+              Optional
+            </div>
+          </div>
+          <button type="submit" className="go">
+            Go!
+          </button>
         </div>
-      </div>
+      </form>
     )
   }
 }
