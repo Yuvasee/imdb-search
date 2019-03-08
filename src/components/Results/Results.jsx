@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { randomRgb } from '../../utils/utils';
 import Spinner from '../Spinner/Spinner';
+import MovieTile from '../MovieTile/MovieTile';
 
 import './Results.scss';
 
@@ -33,29 +33,8 @@ export default class Results extends Component {
       <div className="results">
         {results &&
           <div className="tile-container">
-            {results.map((res, i) => (
-              <div
-                key={res.imdbID + i}
-                className="movie-tile"
-                style={{
-                  backgroundImage: res.Poster === 'N/A' ? 'none' : `url('${res.Poster}')`,
-                  backgroundColor: res.Poster === 'N/A' ? randomRgb() : 'transparent'
-                }}
-              >
-                <div className="movie-year">
-                  {res.Year}
-                </div>
-
-                <div className="movie-title">
-                  {res.Title}
-                </div>
-
-                {res.Poster === 'N/A' &&
-                  <div className="no-poster">
-                    {res.Title}
-                  </div>
-                }
-              </div>
+            {results.map((movie, i) => (
+              <MovieTile movie={movie} key={movie.imdbID + i} />
             ))}
 
             {isPendingResponse &&

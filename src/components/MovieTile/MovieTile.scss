@@ -1,0 +1,97 @@
+$tileMinWidth: 200px;
+
+.movie-tile {
+  $tileWidth: 50vw;
+  width: $tileWidth;
+  height: $tileWidth * 1.49;
+  @media (min-width: $tileMinWidth * 3) {
+    $tileWidth: 33.33vw;
+    width: $tileWidth;
+    height: $tileWidth * 1.49;
+  }
+  @media (min-width: $tileMinWidth * 4) {
+    $tileWidth: 25vw;
+    width: $tileWidth;
+    height: $tileWidth * 1.49;
+  }
+  @media (min-width: $tileMinWidth * 5) {
+    $tileWidth: 20vw;
+    width: $tileWidth;
+    height: $tileWidth * 1.49;
+  }
+  @media (min-width: $tileMinWidth * 6) {
+    $tileWidth: 16.665vw;
+    width: $tileWidth;
+    height: $tileWidth * 1.49;
+  }
+  @media (min-width: $tileMinWidth * 8) {
+    $tileWidth: 12.5vw;
+    width: $tileWidth;
+    height: $tileWidth * 1.49;
+  }
+  @media (min-width: $tileMinWidth * 10) {
+    $tileWidth: 10vw;
+    width: $tileWidth;
+    height: $tileWidth * 1.49;
+  }
+  background-size: cover;
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  overflow: hidden;
+
+  .movie-title, .movie-year {
+    color: white;
+    background: rgba(0,0,0,.8);
+    text-align: center;
+    opacity: 0;
+    transition: all .2s linear;
+  }
+
+  &:hover .movie-title,
+  &:hover .movie-year {
+    opacity: 1;
+  }
+
+  &:hover .movie-year {
+    margin-bottom: 1rem;
+  }
+
+  .movie-title {
+    padding-top: 0.5rem;
+  }
+
+  .movie-year {
+    padding: 0.2rem 0 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 200;
+    margin-bottom: 0;
+  }
+
+  .no-poster {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #000;
+    text-shadow: 0 1px 1px #bbb;
+    padding: 0 1rem;
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+  }
+
+  .spinner-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+
+    .spinner {
+      margin: 0 auto;
+    }
+  }
+}
