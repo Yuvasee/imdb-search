@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 import store from '../store/store';
 
 export const API_REQUEST = 'API_REQUEST';
@@ -24,9 +26,20 @@ export function searchPerform(phrase, page = 1, year) {
       )
       .then(json => {
         if (json.Response !== 'False') {
+          if (page < 2) {
+            toast.success(`Found ${json.totalResults} results`);
+          }
+
           dispatch(apiSuccess(phrase, json, page, year));
-        } else {
+          return;
+        }
+
+        if (page > 1 && json.Response === 'False') {
           dispatch(lastPageLoaded());
+
+        } else {
+          dispatch(apiFailure(json));
+          toast.error('Nothing found. Try another conditions.');
         }
       })
       .catch(error =>

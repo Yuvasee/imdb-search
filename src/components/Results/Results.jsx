@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 
 import { randomRgb } from '../../utils/utils';
 import Spinner from '../Spinner/Spinner';
