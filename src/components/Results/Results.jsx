@@ -7,8 +7,8 @@ import './Results.scss';
 
 export default class Results extends Component {
   loadMore() {
-    //TODO: check for last page loaded!
     const { lastPhrase, lastLoadedPage, lastYear, searchPerform } = this.props;
+
     searchPerform(lastPhrase, lastLoadedPage + 1, lastYear);
   }
 
@@ -27,7 +27,7 @@ export default class Results extends Component {
   }
 
   render() {
-    const { results, isPendingResponse } = this.props;
+    const { results, isPendingResponse, isLastPageLoaded } = this.props;
 
     return (
       <div className="results">
@@ -57,6 +57,18 @@ export default class Results extends Component {
                 }
               </div>
             ))}
+
+            {isPendingResponse &&
+              <div className="movie-tile">
+                <Spinner />
+              </div>
+            }
+          </div>
+        }
+
+        {isLastPageLoaded &&
+          <div className="finish">
+            No more results on your query.
           </div>
         }
 

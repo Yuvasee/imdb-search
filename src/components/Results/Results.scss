@@ -90,6 +90,20 @@ $tileMinWidth: 200px;
         right: 0;
         box-sizing: border-box;
       }
+
+      .spinner-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+
+        .spinner {
+          margin: 0 auto;
+        }
+      }
     }
   }
 
@@ -103,6 +117,15 @@ $tileMinWidth: 200px;
     font-weight: 700;
     color: #bbb;
     text-shadow: 0 1px 1px #ddd;
+  }
+
+  .finish {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #bbb;
+    text-shadow: 0 1px 1px #ddd;
+    padding: 2rem;
+    text-align: center;
   }
 
   .results-spinner {
