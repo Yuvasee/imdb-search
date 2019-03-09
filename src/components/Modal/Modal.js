@@ -75,9 +75,29 @@ export default class Modal extends React.Component {
     const content = (
       <div className="modal-window">
         <div className="modal-content">
-
-
           {!isDetailsPendingResponse &&
+            <div>
+              {details["Poster"] !== 'N/A'
+                ? <img src={details["Poster"]} className="poster" alt={details["Title"]} />
+                : <p>No poster available :-(</p>
+              }
+
+              <h2>{details["Title"]}</h2>
+
+              <table>
+                <tbody>
+                  {keysArray.map((key, i) => (
+                    <tr key={key + i}>
+                      <td>{key}</td>
+                      <td width="100%">{details[key]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          }
+
+          {isDetailsPendingResponse &&
             <Spinner color="#eee" />
           }
         </div>
