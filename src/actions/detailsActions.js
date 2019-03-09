@@ -10,13 +10,15 @@ export const DETAILS_SHOW_MODAL = 'DETAILS_SHOW_MODAL';
 export function detailsShow(movieId) {
   return function(dispatch) {
 
-    dispatch(detailsShowModal(movieId));
+
 
     if (isDetailsInStore(movieId)) {
+      dispatch(detailsShowModal(movieId));
       return Promise.resolve();
     }
 
     dispatch(apiDetailsRequest(true));
+    dispatch(detailsShowModal(movieId));
 
     return fetch(makeApiDetailsUri(movieId))
       .then(response =>
@@ -71,8 +73,6 @@ export function apiDetailsFailure(movieId, error) {
 }
 
 export function detailsShowModal(movieId) {
-  console.log(movieId);
-
   return {
     type: DETAILS_SHOW_MODAL,
     payload: movieId

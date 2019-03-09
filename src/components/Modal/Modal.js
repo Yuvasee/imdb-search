@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Spinner from '../Spinner/Spinner';
+
 import './Modal.scss';
 
 export default class Modal extends React.Component {
@@ -22,7 +24,7 @@ export default class Modal extends React.Component {
 
     this.app = document.getElementById('root'); // add sexy backdrop blur
     this.app.style.transition = `filter 200ms ease-out`;
-    this.app.style.filter = `blur(4px)`;
+    //this.app.style.filter = `blur(4px)`;
 
     document.addEventListener('keydown', this.onEsc); // catch ESC key
     document.body.classList.add('modal-disable-scroll'); // disable scroll
@@ -31,7 +33,7 @@ export default class Modal extends React.Component {
   componentWillUnmount() {
     document.body.classList.remove('modal-disable-scroll');
     document.removeEventListener('keydown', this.onEsc);
-    this.app.style.filter = `blur(0px)`;
+    //this.app.style.filter = `blur(0px)`;
     document.body.removeChild(this.node);
   }
 
@@ -44,13 +46,9 @@ export default class Modal extends React.Component {
   }
 
   render() {
-    const { details } = this.props;
-
-    console.log(details);
-
+    const { details, isDetailsPendingResponse } = this.props;
 
     const keysArray = [
-      "Title",
       "Year",
       "Rated",
       "Released",
@@ -77,11 +75,31 @@ export default class Modal extends React.Component {
     const content = (
       <div className="modal-window">
         <div className="modal-content">
-          {keysArray.map((key, i) => (
-            <p key={key + i}>
-              {details[key]}
-            </p>
-          ))}
+          {!isDetailsPendingResponse &&
+            <div>
+              {details["Poster"] !== 'N/A'
+                ? <img src={details["Poster"]} className="poster" alt={details["Title"]} />
+                : <p>No poster available :-(</p>
+              }
+
+              <h2>{details["Title"]}</h2>
+
+              <table>
+                <tbody>
+                  {keysArray.map((key, i) => (
+                    <tr key={key + i}>
+                      <td>{key}</td>
+                      <td width="100%">{details[key]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          }
+
+          {isDetailsPendingResponse &&
+            <Spinner />
+          }
         </div>
       </div>
     );

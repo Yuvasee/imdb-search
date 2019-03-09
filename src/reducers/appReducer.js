@@ -54,6 +54,7 @@ const appReducer = (state = initState, action) => {
 
     case API_DETAILS_REQUEST:
       nextState.isDetailsPendingResponse = payload;
+      return nextState;
 
     default:
       return state;

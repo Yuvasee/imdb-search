@@ -36,8 +36,8 @@ export default class TopBar extends Component {
     const { phrase, year } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="top-bar">
+      <div className="top-bar">
+        <form onSubmit={this.handleSubmit}>
           <div className="logo">
             IMDB Search
           </div>
@@ -69,7 +69,6 @@ export default class TopBar extends Component {
               id="year"
               className="search year"
               value={year}
-              autoFocus
               onChange={this.handleChange}
               placeholder="1999"
             />
@@ -83,8 +82,8 @@ export default class TopBar extends Component {
           <button type="submit" className="go">
             Go!
           </button>
-        </div>
-      </form>
-    )
+        </form>
+      </div>
+    );
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Spinner from '../Spinner/Spinner';
 import MovieTile from '../MovieTile/MovieTileContainer';
+import { getDocHeight } from '../../utils/utils';
 
 import './Results.scss';
 
@@ -19,7 +20,7 @@ export default class Results extends Component {
   handleScroll() {
     const {isPendingResponse, isLastPageLoaded } = this.props;
 
-    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+    if($(window).scrollTop() + $(window).height() == getDocHeight()) {
       if (!isPendingResponse && !isLastPageLoaded) {
         this.loadMore();
       }
