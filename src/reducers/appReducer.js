@@ -1,12 +1,24 @@
-import { API_REQUEST, API_SUCCESS, API_FAILURE, LAST_PAGE_LOADED, PHRASE_SWITCH }
-  from '../actions/actions';
+import {
+  API_REQUEST,
+  API_SUCCESS,
+  API_FAILURE,
+  LAST_PAGE_LOADED,
+  PHRASE_SWITCH
+} from '../actions/actions';
+import {
+  DETAILS_SHOW_MODAL,
+  API_DETAILS_REQUEST
+} from '../actions/detailsActions';
 
+/** UI state reducer */
 const initState = {
   lastPhrase: '',
   lastLoadedPage: 0,
   lastYear: '',
   isPendingResponse: false,
-  isLastPageLoaded: false
+  isLastPageLoaded: false,
+  showModal: false,
+  isDetailsPendingResponse: false,
 };
 
 const appReducer = (state = initState, action) => {
@@ -35,6 +47,13 @@ const appReducer = (state = initState, action) => {
       nextState.lastYear = payload.year;
       nextState.isLastPageLoaded = false;
       return nextState;
+
+    case DETAILS_SHOW_MODAL:
+      nextState.showModal = payload;
+      return nextState;
+
+    case API_DETAILS_REQUEST:
+      nextState.isDetailsPendingResponse = payload;
 
     default:
       return state;

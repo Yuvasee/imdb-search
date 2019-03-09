@@ -39,6 +39,7 @@ $tileMinWidth: 200px;
   flex-direction: column-reverse;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 
   .movie-title, .movie-year {
     color: white;

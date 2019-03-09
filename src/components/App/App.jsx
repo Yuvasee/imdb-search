@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import TopBar from '../TopBar/TopBarContainer';
 import Results from '../Results/ResultsContainer';
+import Modal from '../Modal/ModalContainer';
 
 export default class App extends Component {
   render() {
@@ -23,6 +24,10 @@ export default class App extends Component {
           draggable
           pauseOnHover
         />
+
+        {this.props.showModal &&
+          <Modal close={() => this.props.detailsShowModal(false)} />
+        }
       </div>
     )
   }

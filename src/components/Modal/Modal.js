@@ -44,12 +44,44 @@ export default class Modal extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { details } = this.props;
+
+    console.log(details);
+
+
+    const keysArray = [
+      "Title",
+      "Year",
+      "Rated",
+      "Released",
+      "Runtime",
+      "Genre",
+      "Director",
+      "Writer",
+      "Actors",
+      "Plot",
+      "Language",
+      "Country",
+      "Awards",
+      //"Ratings",
+      "Metascore",
+      "imdbRating",
+      "imdbVotes",
+      "imdbID",
+      "DVD",
+      "BoxOffice",
+      "Production",
+      "Website",
+    ];
 
     const content = (
       <div className="modal-window">
         <div className="modal-content">
-          {children}
+          {keysArray.map((key, i) => (
+            <p key={key + i}>
+              {details[key]}
+            </p>
+          ))}
         </div>
       </div>
     );

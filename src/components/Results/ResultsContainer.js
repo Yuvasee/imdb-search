@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
   return {
     results:            state.search[`${lastPhrase}@${lastYear}`],
     lastPhrase:         lastPhrase,
-    lastLoadedPage:           lastLoadedPage,
+    lastLoadedPage:     lastLoadedPage,
     lastYear:           lastYear,
     isPendingResponse:  isPendingResponse,
     isLastPageLoaded:   isLastPageLoaded

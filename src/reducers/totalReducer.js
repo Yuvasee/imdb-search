@@ -1,5 +1,6 @@
 import { API_SUCCESS } from '../actions/actions';
 
+/** Reducer to store total pages loaded and results available */
 const initState = {};
 
 const totalReducer = (state = initState, action) => {

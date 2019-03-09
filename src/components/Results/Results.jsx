@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Spinner from '../Spinner/Spinner';
-import MovieTile from '../MovieTile/MovieTile';
+import MovieTile from '../MovieTile/MovieTileContainer';
 
 import './Results.scss';
 

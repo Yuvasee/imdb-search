@@ -5,13 +5,15 @@ import { throttle } from 'lodash';
 import app from '../reducers/appReducer';
 import search from '../reducers/searchReducer';
 import total from '../reducers/totalReducer';
+import details from '../reducers/detailsReducer';
 
 import { loadState, saveState } from './localStorage';
 
 const rootReducer = combineReducers({
   app,
   search,
-  total
+  total,
+  details
 });
 
 const persistedState = loadState();
